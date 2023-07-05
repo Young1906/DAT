@@ -21,9 +21,7 @@ def build_model(config):
             # To be able to load pretrained weight, keep config num-class =
             # 1000, adding dense layer with 12 classes
             model.train(False)
-            model = torch.nn.Sequential(
-                    *list(model.get_children())[:-1],
-                    torch.nn.Linear(768, 12))
+            model.clf_head = torch.nn.Linear(768, 12) 
     else:
         raise NotImplementedError(f"Unkown model: {model_type}")
 
