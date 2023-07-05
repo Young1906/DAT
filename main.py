@@ -67,8 +67,6 @@ def parse_option():
 def main():
     
     args, config = parse_option()
-
-    return
     local_rank = int(os.environ["LOCAL_RANK"])
     rank = int(os.environ["RANK"])
     world_size = int(os.environ['WORLD_SIZE'])
