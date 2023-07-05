@@ -9,6 +9,7 @@
 # --------------------------------------------------------
 
 from .dat import DAT
+import torch
 
 def build_model(config):
 
