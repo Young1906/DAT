@@ -167,6 +167,10 @@ def update_config(config, args):
     # merge from specific arguments
     if args.data_path:
         config.DATA.DATA_PATH = args.data_path
+    if args.data_dataset:
+        config.DATA.DATASET = args.data_dataset 
+    if args.model_numclasses:
+        config.MODEL.NUM_CLASSES= args.model_numclasses
     if args.resume:
         config.MODEL.RESUME = args.resume
     if args.amp:
@@ -189,6 +193,4 @@ def get_config(args):
     # Return a clone so that the defaults will not be altered
     # This is for the "local variable" use pattern
     config = _C.clone()
-    update_config(config, args)
-
-    return config
+    update_config(config, args) return config
