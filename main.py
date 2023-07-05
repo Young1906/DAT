@@ -151,7 +151,7 @@ def main():
             return
 
     if config.DATA.DATASET == 'racomnet':
-        model.train(False)
+        # model.train(False)
         model.clf_head = torch.nn.Linear(768, 12)
 
     logger.info("Start training")
