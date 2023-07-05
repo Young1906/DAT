@@ -107,11 +107,16 @@ def main():
 
     logger.info(f"Creating model:{config.MODEL.TYPE}/{config.MODEL.NAME}")
     model = build_model(config)
-    
     model.cuda()
     logger.info(str(model))
 
     optimizer = build_optimizer(config, model)
+
+    model = nn.parallel.DistributedDataParallel(model, device_ids=[local_rank], broadcast_buffers=True, find_unused_parameters=False)
+    model_without_ddp = model.module
+    
+    lr_scheduler = build_scheduler(config, optimizer, len(data_loader_train))
+
     if config.AUG.MIXUP > 0.:
         # smoothing is handled with mixup label transform
         criterion = SoftTargetCrossEntropy()
@@ -144,8 +149,8 @@ def main():
         logger.info(f"Accuracy of the network on the {len(dataset_val)} test images: {acc1:.1f}%")
         if config.EVAL_MODE:
             return
-    
-    if config.DATA.DATASET=='racomnet':
+
+    if config.DATA.DATASET == 'racomnet':
         model.train(False)
         model.clf_head = torch.nn.Linear(768, 12)
 
