@@ -193,4 +193,5 @@ def get_config(args):
     # Return a clone so that the defaults will not be altered
     # This is for the "local variable" use pattern
     config = _C.clone()
-    update_config(config, args) return config
+    update_config(config, args)
+    return config

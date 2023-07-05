@@ -47,7 +47,6 @@ def parse_option():
     )
     # easy config modification
     parser.add_argument('--data-path', type=str, help='path to dataset')
-    
     parser.add_argument('--data-dataset', type=str, help='dataset\'s name')
     parser.add_argument('--model-numclasses', type=int, help='number of classes')
     parser.add_argument('--resume', help='resume from checkpoint')
