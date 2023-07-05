@@ -107,11 +107,7 @@ def main():
 
     logger.info(f"Creating model:{config.MODEL.TYPE}/{config.MODEL.NAME}")
     model = build_model(config)
-    model.train(False)
     
-    if config.DATA.DATASET=='racomnet':
-        model.clf_head = torch.nn.Linear(768, 12)
-
     model.cuda()
     logger.info(str(model))
 
@@ -148,6 +144,10 @@ def main():
         logger.info(f"Accuracy of the network on the {len(dataset_val)} test images: {acc1:.1f}%")
         if config.EVAL_MODE:
             return
+    
+    if config.DATA.DATASET=='racomnet':
+        model.train(False)
+        model.clf_head = torch.nn.Linear(768, 12)
 
     logger.info("Start training")
     start_time = time.time()
