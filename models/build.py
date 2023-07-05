@@ -22,6 +22,7 @@ def build_model(config):
             # 1000, adding dense layer with 12 classes
             model.train(False)
             model.clf_head = torch.nn.Linear(768, 12) 
+            model.clf_head.train(True)
     else:
         raise NotImplementedError(f"Unkown model: {model_type}")
 
