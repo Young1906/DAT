@@ -4,7 +4,7 @@ MODEL:
   DAT:
     img_size: 224
     patch_size: 4
-    num_classes: 12 
+    num_classes: 1000
     expansion: 4
     dim_stem: 96
     dims: [96, 192, 384, 768]
